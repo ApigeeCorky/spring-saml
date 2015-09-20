@@ -148,7 +148,6 @@
 				</property>
 			</bean>
 		</constructor-arg>
-		<property name="normalizeBaseUrl" value="true"></property>
 	</bean>
 
 	<!-- The filter is waiting for connections on URL suffixed with filterSuffix 
