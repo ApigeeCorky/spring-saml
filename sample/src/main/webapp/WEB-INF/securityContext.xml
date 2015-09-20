@@ -139,6 +139,7 @@
 		<constructor-arg>
 			<bean class="org.springframework.security.saml.metadata.MetadataGenerator">
 				<property name="entityId" value="urn:sso:rajnagulapalle:truedash" />
+				<property name="entityBaseURL" value="https://sso.truedash.com" />
 				<property name="extendedMetadata">
 					<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
 						<property name="signMetadata" value="false" />
@@ -147,6 +148,7 @@
 				</property>
 			</bean>
 		</constructor-arg>
+		<property name="normalizeBaseUrl" value="true"></property>
 	</bean>
 
 	<!-- The filter is waiting for connections on URL suffixed with filterSuffix 
