@@ -124,7 +124,8 @@
 
 	<!-- IDP Discovery Service -->
 	<bean id="samlIDPDiscovery" class="org.springframework.security.saml.SAMLDiscovery">
-		<property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp" />
+		<!-- Do not show the IdP selection page. Always use the default IdP. There's only one configured anyway. -->
+        <!--<property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp"/> -->
 	</bean>
 
 	<!-- Filter automatically generates default SP metadata -->
