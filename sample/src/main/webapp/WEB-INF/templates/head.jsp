@@ -6,5 +6,5 @@
     <meta name="author" content="Rajender Nagulapalle" />
     <link rel="icon" type="image/png" href="https://sso.truedash.com/images/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="https://sso.truedash.com/css/style.css" media="screen" />
-    <title>Spring SAML Sample application</title>
+    <title>Truedash SSO Application</title>
 </head>
