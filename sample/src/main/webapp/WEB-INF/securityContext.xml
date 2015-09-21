@@ -218,7 +218,7 @@
 		<property name="serverName" value="sso.truedash.com" />
 		<property name="serverPort" value="443" />
 		<property name="includeServerPortInRequestURL" value="false" />
-		<property name="contextPath" value="/truedash-sso" />
+		<property name="contextPath" value="/" />
 	</bean>
 
 	<!-- Processing filter for WebSSO profile messages -->
