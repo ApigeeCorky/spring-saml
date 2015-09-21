@@ -140,7 +140,7 @@
 		<constructor-arg>
 			<bean class="org.springframework.security.saml.metadata.MetadataGenerator">
 				<property name="entityId" value="urn:sso:rajnagulapalle:truedash" />
-				<property name="entityBaseURL" value="https://sso.truedash.com:8080" />
+				<property name="entityBaseURL" value="https://sso.truedash.com:443" />
 				<property name="extendedMetadata">
 					<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
 						<property name="signMetadata" value="false" />
