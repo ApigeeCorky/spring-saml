@@ -124,8 +124,9 @@
 
 	<!-- IDP Discovery Service -->
 	<bean id="samlIDPDiscovery" class="org.springframework.security.saml.SAMLDiscovery">
-		<!-- Do not show the IdP selection page. Always use the default IdP. There's only one configured anyway. -->
-        <property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp"/>
+		<!-- Do not show the IdP selection page. Always use the default IdP. There's 
+			only one configured anyway. -->
+		<property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp" />
 	</bean>
 
 	<!-- Filter automatically generates default SP metadata -->
@@ -210,16 +211,12 @@
 	</bean>
 
 	<!-- Provider of default SAML Context -->
-	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" 
-		/> -->
 	<bean id="contextProvider"
-		class="org.springframework.security.saml.context.SAMLContextProviderLB">
-		<property name="scheme" value="https" />
-		<property name="serverName" value="sso.truedash.com" />
-		<property name="serverPort" value="443" />
-		<property name="includeServerPortInRequestURL" value="false" />
-		<property name="contextPath" value="/" />
-	</bean>
+		class="org.springframework.security.saml.context.SAMLContextProviderImpl" />
+	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderLB"> 
+		<property name="scheme" value="https" /> <property name="serverName" value="sso.truedash.com" 
+		/> <property name="serverPort" value="443" /> <property name="includeServerPortInRequestURL" 
+		value="false" /> <property name="contextPath" value="/" /> </bean> -->
 
 	<!-- Processing filter for WebSSO profile messages -->
 	<bean id="samlWebSSOProcessingFilter" class="org.springframework.security.saml.SAMLProcessingFilter">
