@@ -212,7 +212,7 @@
 	<!-- Provider of default SAML Context -->
 	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" 
 		/> -->
-	 <bean id="contextProvider"
+	<!--  <bean id="contextProvider"
 		class="org.springframework.security.saml.context.SAMLContextProviderLB">
 		<property name="scheme" value="https" />
 		<property name="serverName" value="sso.truedash.com" />
@@ -222,10 +222,11 @@
 		<property name="storageFactory">
    			 <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/>
   		</property>
-	</bean>
-	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl"> 
+	</bean> -->
+	<bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl"> 
 		<property name="storageFactory"> <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/> 
-		</property> </bean> -->
+		</property> 
+	</bean>
 
 	<!-- Processing filter for WebSSO profile messages -->
 	<bean id="samlWebSSOProcessingFilter" class="org.springframework.security.saml.SAMLProcessingFilter">
