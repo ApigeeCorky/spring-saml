@@ -139,8 +139,8 @@
 		class="org.springframework.security.saml.metadata.MetadataGeneratorFilter">
 		<constructor-arg>
 			<bean class="org.springframework.security.saml.metadata.MetadataGenerator">
-				<property name="entityId" value="urn:sso:rajnagulapalle:truedash2" />
-				<property name="entityBaseURL" value="https://sso.truedash.com/truedash-sso" />
+				<property name="entityId" value="urn:sso:rajnagulapalle:truedash" />
+				<property name="entityBaseURL" value="https://sso.truedash.com" />
 				<property name="extendedMetadata">
 					<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
 						<property name="signMetadata" value="false" />
@@ -213,21 +213,21 @@
 	<!-- Provider of default SAML Context -->
 	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" 
 		/> -->
-	<!--  <bean id="contextProvider"
+	  <bean id="contextProvider"
 		class="org.springframework.security.saml.context.SAMLContextProviderLB">
 		<property name="scheme" value="https" />
 		<property name="serverName" value="sso.truedash.com" />
 		<property name="serverPort" value="443" />
 		<property name="includeServerPortInRequestURL" value="false" />
-		<property name="contextPath" value="/" />
+		<property name="contextPath" value="" />
 		<property name="storageFactory">
    			 <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/>
   		</property>
-	</bean> -->
-	<bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl"> 
+	</bean>
+	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl"> 
 		<property name="storageFactory"> <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/> 
 		</property> 
-	</bean>
+	</bean> -->
 
 	<!-- Processing filter for WebSSO profile messages -->
 	<bean id="samlWebSSOProcessingFilter" class="org.springframework.security.saml.SAMLProcessingFilter">
