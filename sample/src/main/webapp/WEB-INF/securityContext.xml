@@ -199,16 +199,15 @@
 							<property name="requireLogoutRequestSigned" value="false" />
 							<property name="requireLogoutResponseSigned" value="false" />
 							<property name="idpDiscoveryEnabled" value="true" />
-							<property name="idpDiscoveryURL"
-								value="https://sso.truedash.com:443/truedash-sso/saml/discovery" />
+							<property name="idpDiscoveryURL" value="https://sso.truedash.com/saml/discovery" />
 							<property name="idpDiscoveryResponseURL"
-								value="https://sso.truedash.com:443/truedash-sso/saml/login?disco=true" />
+								value="https://sso.truedash.com/saml/login?disco=true" />
 						</bean>
 					</constructor-arg>
 				</bean>
 				<bean
 					class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
-										<constructor-arg>
+					<constructor-arg>
 						<bean
 							class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">
 							<constructor-arg>
