@@ -27,8 +27,8 @@
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/saml/web/**"
 			access="ROLE_ADMIN" />
-		<security:custom-filter before="FIRST"
-			ref="metadataGeneratorFilter" />
+		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" 
+			/> -->
 	</security:http>
 
 	<!-- Secured pages with SAML as entry point -->
@@ -36,8 +36,8 @@
 		use-expressions="false">
 		<security:intercept-url pattern="/**"
 			access="IS_AUTHENTICATED_FULLY" />
-		<security:custom-filter before="FIRST"
-			ref="metadataGeneratorFilter" />
+		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" 
+			/> -->
 		<security:custom-filter after="BASIC_AUTH_FILTER"
 			ref="samlFilter" />
 	</security:http>
@@ -124,8 +124,9 @@
 
 	<!-- IDP Discovery Service -->
 	<bean id="samlIDPDiscovery" class="org.springframework.security.saml.SAMLDiscovery">
-		<!-- Do not show the IdP selection page. Always use the default IdP. There's only one configured anyway. -->
-        <property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp"/>
+		<!-- Do not show the IdP selection page. Always use the default IdP. There's 
+			only one configured anyway. -->
+		<property name="idpSelectionPath" value="/WEB-INF/security/idpSelection.jsp" />
 	</bean>
 
 	<!-- Filter automatically generates default SP metadata -->
@@ -168,14 +169,64 @@
 		class="org.springframework.security.saml.metadata.CachingMetadataManager">
 		<constructor-arg>
 			<list>
-				<bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
+				<bean
+					class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
 					<constructor-arg>
-						<value type="java.lang.String">http://idp.ssocircle.com/idp-meta.xml</value>
+						<bean
+							class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">
+							<constructor-arg>
+								<bean class="java.util.Timer" />
+							</constructor-arg>
+							<constructor-arg>
+								<bean class="org.opensaml.util.resource.ClasspathResource">
+									<constructor-arg value="/metadata/ssotruedashcom_sp.xml" />
+								</bean>
+							</constructor-arg>
+							<property name="parserPool" ref="parserPool" />
+						</bean>
 					</constructor-arg>
 					<constructor-arg>
-						<value type="int">50000</value>
+						<bean
+							class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="securityProfile" value="metaiop" />
+							<property name="sslSecurityProfile" value="pkix" />
+							<property name="sslHostnameVerification" value="default" />
+							<property name="signMetadata" value="false" />
+							<property name="signingKey" value="apollo" />
+							<property name="encryptionKey" value="apollo" />
+							<property name="requireArtifactResolveSigned" value="false" />
+							<property name="requireLogoutRequestSigned" value="false" />
+							<property name="requireLogoutResponseSigned" value="false" />
+							<property name="idpDiscoveryEnabled" value="true" />
+							<property name="idpDiscoveryURL"
+								value="https://sso.truedash.com:443/truedash-sso/saml/discovery" />
+							<property name="idpDiscoveryResponseURL"
+								value="https://sso.truedash.com:443/truedash-sso/saml/login?disco=true" />
+						</bean>
 					</constructor-arg>
-					<property name="parserPool" ref="parserPool" />
+				</bean>
+				<bean
+					class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+										<constructor-arg>
+						<bean
+							class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">
+							<constructor-arg>
+								<bean class="java.util.Timer" />
+							</constructor-arg>
+							<constructor-arg>
+								<bean class="org.opensaml.util.resource.ClasspathResource">
+									<constructor-arg value="/metadata/idp-meta.xml" />
+								</bean>
+							</constructor-arg>
+							<property name="parserPool" ref="parserPool" />
+						</bean>
+					</constructor-arg>
+
+					<constructor-arg>
+						<bean
+							class="org.springframework.security.saml.metadata.ExtendedMetadata" />
+					</constructor-arg>
 				</bean>
 			</list>
 		</constructor-arg>
@@ -213,7 +264,7 @@
 	<!-- Provider of default SAML Context -->
 	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" 
 		/> -->
-	  <bean id="contextProvider"
+	<bean id="contextProvider"
 		class="org.springframework.security.saml.context.SAMLContextProviderLB">
 		<property name="scheme" value="https" />
 		<property name="serverName" value="sso.truedash.com" />
@@ -221,13 +272,12 @@
 		<property name="includeServerPortInRequestURL" value="false" />
 		<property name="contextPath" value="" />
 		<property name="storageFactory">
-   			 <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/>
-  		</property>
+			<bean class="org.springframework.security.saml.storage.EmptyStorageFactory" />
+		</property>
 	</bean>
 	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl"> 
 		<property name="storageFactory"> <bean class="org.springframework.security.saml.storage.EmptyStorageFactory"/> 
-		</property> 
-	</bean> -->
+		</property> </bean> -->
 
 	<!-- Processing filter for WebSSO profile messages -->
 	<bean id="samlWebSSOProcessingFilter" class="org.springframework.security.saml.SAMLProcessingFilter">
