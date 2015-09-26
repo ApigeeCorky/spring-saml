@@ -227,6 +227,19 @@
 						<bean
 							class="org.springframework.security.saml.metadata.ExtendedMetadata" />
 					</constructor-arg>
+					<constructor-arg>
+						<!-- Extended metadata for specific IDPs -->
+						<map>
+							<entry key="http://idp.ssocircle.com">
+								<bean
+									class="org.springframework.security.saml.metadata.ExtendedMetadata" />
+							</entry>
+							<entry key="https://login.cit.lastmile.com/">
+								<bean
+									class="org.springframework.security.saml.metadata.ExtendedMetadata" />
+							</entry>
+						</map>
+					</constructor-arg>
 				</bean>
 			</list>
 		</constructor-arg>
@@ -260,9 +273,11 @@
 		<!-- OPTIONAL property: can be used to store/load user data after login -->
 		<property name="userDetails" ref="userDetailsImp" />
 	</bean>
-	<!-- After successful authentication use this object to get Authentication object -->
-	<bean id="userDetailsImp" class="com.truedash.security.custom.TruedashSAMLUserDetailsService"> 
-		
+	<!-- After successful authentication use this object to get Authentication 
+		object -->
+	<bean id="userDetailsImp"
+		class="com.truedash.security.custom.TruedashSAMLUserDetailsService">
+
 	</bean>
 	<!-- Provider of default SAML Context -->
 	<!-- <bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" 

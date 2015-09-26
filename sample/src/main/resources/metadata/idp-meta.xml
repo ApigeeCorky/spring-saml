@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntitiesDescriptor
+        xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+        xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <EntityDescriptor entityID="http://idp.ssocircle.com" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
     <IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
         <KeyDescriptor use="signing">
@@ -62,3 +66,68 @@ eL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=
         <NameIDMappingService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.ssocircle.com:443/sso/NIMSoap/metaAlias/ssocircle"/>
     </IDPSSODescriptor>
 </EntityDescriptor>
+<EntityDescriptor entityID="https://login.cit.lastmile.com/">
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <KeyDescriptor>
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIIHlzCCBn+gAwIBAgIKaBV5nAAAAADXaDANBgkqhkiG9w0BAQUFADBVMRMwEQYK
+                            CZImiZPyLGQBGRYDY29tMRUwEwYKCZImiZPyLGQBGRYFb2NhZG8xJzAlBgNVBAMT
+                            Hk9jYWRvIEx0ZCBDb3Jwb3JhdGUgSXNzdWluZyBDQTAeFw0xNDA2MjYxMjAwNDVa
+                            Fw0xNjA2MjUxMjAwNDVaMIG7MQswCQYDVQQGEwJHQjEWMBQGA1UECBMNSGVydGZv
+                            cmRzaGlyZTERMA8GA1UEBxMISGF0ZmllbGQxDjAMBgNVBAoTBU9jYWRvMSkwJwYD
+                            VQQLEyBPY2FkbyBJbnRlcm5hbCBBcHBsaWNhdGlvbiBVc2VyczEaMBgGA1UEAxMR
+                            Y2l0LWFpbS5vY2Fkby5jb20xKjAoBgkqhkiG9w0BCQEWG2NpdC1haW0ub2NhZG8u
+                            Y29tQG9jYWRvLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAPTd
+                            iTK5kAyfm5nCa1HWt4MITZ7nZ0vouVE5+TeK6FrrgcoRPTB03TNlja0Vs3SXk4SQ
+                            DDLfDMaX8bVpLbt89hWxhTxn2QyKPsKVcY90aidFR3ccPwcmqEOjUpDjQbowQsrM
+                            d6wAYKZW60o27Rl4aoAVW3QYHJiaGgK8Ym9J7VPboDPMfgrXzzvItivvXC8UdXrL
+                            4fynJJWZkEnVJQyrZs4qMFEWnzms+HSOv3I/jQj/EX74+MgzuenmEE78To8HOy36
+                            bjMp6sIVWPIkowjcuJrtI3YAZ3v7sGnjmVeyBJn/R1DgTETFUN6hBfyl7Bd205Ye
+                            R9cQYvOqRokZtYAD0KMCAwEAAaOCBAAwggP8MB0GA1UdDgQWBBTsXl+b2o0QgAAo
+                            laC87PmjCpiMozAfBgNVHSMEGDAWgBSVMSzyRx1oAqxMdH3jLZKP+g7YYTCCAX4G
+                            A1UdHwSCAXUwggFxMIIBbaCCAWmgggFlhoHKbGRhcDovLy9DTj1PY2FkbyUyMEx0
+                            ZCUyMENvcnBvcmF0ZSUyMElzc3VpbmclMjBDQSxDTj1hemF6ZWwsQ049Q0RQLENO
+                            PVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZpZ3Vy
+                            YXRpb24sREM9b2NhZG8sREM9Y29tP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3Q/
+                            YmFzZT9vYmplY3RDbGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludIZNaHR0cDovL2F6
+                            YXplbC5vY2Fkby5jb20vQ2VydEVucm9sbC9PY2FkbyUyMEx0ZCUyMENvcnBvcmF0
+                            ZSUyMElzc3VpbmclMjBDQS5jcmyGR2ZpbGU6Ly9cXGF6YXplbC5vY2Fkby5jb21c
+                            Q2VydEVucm9sbFxPY2FkbyBMdGQgQ29ycG9yYXRlIElzc3VpbmcgQ0EuY3JsMIIB
+                            qgYIKwYBBQUHAQEEggGcMIIBmDCBwwYIKwYBBQUHMAKGgbZsZGFwOi8vL0NOPU9j
+                            YWRvJTIwTHRkJTIwQ29ycG9yYXRlJTIwSXNzdWluZyUyMENBLENOPUFJQSxDTj1Q
+                            dWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0
+                            aW9uLERDPW9jYWRvLERDPWNvbT9jQUNlcnRpZmljYXRlP2Jhc2U/b2JqZWN0Q2xh
+                            c3M9Y2VydGlmaWNhdGlvbkF1dGhvcml0eTBqBggrBgEFBQcwAoZeaHR0cDovL2F6
+                            YXplbC5vY2Fkby5jb20vQ2VydEVucm9sbC9hemF6ZWwub2NhZG8uY29tX09jYWRv
+                            JTIwTHRkJTIwQ29ycG9yYXRlJTIwSXNzdWluZyUyMENBLmNydDBkBggrBgEFBQcw
+                            AoZYZmlsZTovL1xcYXphemVsLm9jYWRvLmNvbVxDZXJ0RW5yb2xsXGF6YXplbC5v
+                            Y2Fkby5jb21fT2NhZG8gTHRkIENvcnBvcmF0ZSBJc3N1aW5nIENBLmNydDAMBgNV
+                            HRMBAf8EAjAAMAsGA1UdDwQEAwIFoDA9BgkrBgEEAYI3FQcEMDAuBiYrBgEEAYI3
+                            FQiF6aIphMDXZIfdmSiCzMkrhcTxYoFj9KhJhZuaVQIBZAIBBDATBgNVHSUEDDAK
+                            BggrBgEFBQcDATAbBgkrBgEEAYI3FQoEDjAMMAoGCCsGAQUFBwMBMA0GCSqGSIb3
+                            DQEBBQUAA4IBAQDIEZVgTPJnlAUy6rrqD+WsLkWMUes2kLtm4WNwZllsdAP9jDEw
+                            zWrnbwRvL/f76k6YGsMRECyWYz3y2Kb7lXR//WndaHLz7z8LW5hH2QeSG3cHoySv
+                            fpYDY2Dhk3cofsSjJuxI3uYKeH1JK6JsD/jLUCnc24Ya9L6Yg6arhwmDQnlsme7c
+                            Wkx7I2q8k1b08L6FCFPWiA0iSY7ID6uUBDtFFi0fzKvECnNVTfBF1XELxZu8YmzH
+                            yx3oqutdvTggHLqexQQjlvRzkAY+AVmgRDHruc3yTj2INX8/zTva2AlT0lCJVTbY
+                            cWa08gyZV+Z/Ii1BE/dxBMYbz8jKULV8yyBV
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </KeyDescriptor>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login.cit.lastmile.com/pandasso/saml2/login" />
+            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://login.cit.lastmile.com/pandasso/saml2/logout" />
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Ocado Test Identity</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Ocado Test Identity</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://www.ocado.com/</OrganizationURL>
+        </Organization>
+    </EntityDescriptor>
+    </EntitiesDescriptor>
