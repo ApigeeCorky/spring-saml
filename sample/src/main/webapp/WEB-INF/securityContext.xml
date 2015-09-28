@@ -16,8 +16,7 @@
 	<security:http security="none" pattern="/images/**" />
 	<security:http security="none" pattern="/css/**" />
 	<security:http security="none" pattern="/logout.jsp" />
-	<security:http security="none" pattern="/user" />
-
+	
 	<!-- Security for the administration UI -->
 	<security:http pattern="/saml/web/**" use-expressions="false">
 		<security:access-denied-handler
