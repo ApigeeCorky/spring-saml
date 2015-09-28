@@ -21,7 +21,7 @@
 
 	<servlet-mapping>
 		<servlet-name>saml</servlet-name>
-		<url-pattern>/saml/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<filter>
