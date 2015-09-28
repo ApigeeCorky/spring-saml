@@ -38,8 +38,8 @@
 		use-expressions="false">
 		<security:intercept-url pattern="/**"
 			access="IS_AUTHENTICATED_FULLY" />
-		<security:intercept-url pattern="/saml/web/redirect/truedash"
-			access="IS_AUTHENTICATED_FULLY" />	
+		<!-- <security:intercept-url pattern="/saml/web/redirect/truedash"
+			access="IS_AUTHENTICATED_FULLY" />	 -->
 		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" 
 			/> -->
 		<security:custom-filter after="BASIC_AUTH_FILTER"
@@ -50,6 +50,9 @@
 	<bean id="samlFilter" class="org.springframework.security.web.FilterChainProxy">
 		<security:filter-chain-map request-matcher="ant">
 			<security:filter-chain pattern="/saml/login/**"
+				filters="samlEntryPoint" />
+			<!-- custom route added by raj -->
+			<security:filter-chain pattern="/saml/web/redirect/**"
 				filters="samlEntryPoint" />
 			<security:filter-chain pattern="/saml/logout/**"
 				filters="samlLogoutFilter" />
