@@ -29,7 +29,7 @@ import org.springframework.web.client.RestTemplate;
 **/
 
 @Controller
-@RequestMapping("/saml")
+@RequestMapping("/truedash-sso/saml")
 public class RedirectController {
 	
 	private final Logger log = LoggerFactory.getLogger(RedirectController.class);
