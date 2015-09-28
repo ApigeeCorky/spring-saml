@@ -39,7 +39,9 @@ public class RedirectController {
 		
 		if(authentication == null){
 			log.info("******No athentication object found****");
-		} 
+		} else{
+			log.info(authentication.getName());
+		}
 		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
