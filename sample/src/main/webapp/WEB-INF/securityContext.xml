@@ -9,7 +9,7 @@
 	<context:annotation-config />
 
 	<!-- Scan for auto-wiring classes in spring saml packages -->
-	<context:component-scan base-package="com.truedash.security.saml" />
+	<context:component-scan base-package="com.truedash.security" />
 
 	<!-- Unsecured pages -->
 	<security:http security="none" pattern="/favicon.ico" />
@@ -51,7 +51,7 @@
 			<security:filter-chain pattern="/saml/login/**"
 				filters="samlEntryPoint" />
 			<!-- custom route added by raj -->
-			<security:filter-chain pattern="/saml/web/redirect/**"
+			<security:filter-chain pattern="/saml/redirect/**"
 				filters="samlEntryPoint" />
 			<security:filter-chain pattern="/saml/logout/**"
 				filters="samlLogoutFilter" />

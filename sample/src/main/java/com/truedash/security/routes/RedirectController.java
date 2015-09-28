@@ -1,4 +1,4 @@
-package com.truedash.security.saml.web;
+package com.truedash.security.routes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,12 +29,12 @@ import org.springframework.web.client.RestTemplate;
 **/
 
 @Controller
-@RequestMapping("/redirect")
+@RequestMapping("/saml")
 public class RedirectController {
 	
 	private final Logger log = LoggerFactory.getLogger(RedirectController.class);
 	
-	@RequestMapping(value = "/truedash")
+	@RequestMapping(value = "/redirect")
     public String generateMetadata(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		
 		if(authentication == null){
