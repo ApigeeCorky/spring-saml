@@ -47,9 +47,9 @@
             </div>
             <div class="clearer">&nbsp;</div>
         </div>
-        <jsp:include page="/WEB-INF/templates/sidebar.jsp"/>
+       <%--  <jsp:include page="/WEB-INF/templates/sidebar.jsp"/> --%>
     </div>
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
+   <%--  <jsp:include page="/WEB-INF/templates/footer.jsp"/> --%>
 </div>
 </body>
 </html>
