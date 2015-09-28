@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.InternalResourceView;
 
 @Controller
 public class TruedashSAMLController {
@@ -15,7 +16,7 @@ public class TruedashSAMLController {
 	@RequestMapping(value = "/user")
 	public ModelAndView metadataList() throws MetadataProviderException {
 		log.info("******inside custom handler****");
-		ModelAndView model = new ModelAndView("index.jsp");
+		ModelAndView model = new ModelAndView(new InternalResourceView("/WEB-INF/security/user.jsp", true));
 
 		return model;
 
