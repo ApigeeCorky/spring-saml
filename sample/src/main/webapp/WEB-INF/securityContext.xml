@@ -75,7 +75,7 @@
 	</bean> -->
 	<bean id="successRedirectHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<property name="defaultTargetUrl" value="/saml/web/redirect/truedash" />
+		<property name="defaultTargetUrl" value="/saml/redirect" />
 	</bean>
 	<!-- Use the following for interpreting RelayState coming from unsolicited 
 		response as redirect URL: <bean id="successRedirectHandler" class="org.springframework.security.saml.SAMLRelayStateSuccessHandler"> 
