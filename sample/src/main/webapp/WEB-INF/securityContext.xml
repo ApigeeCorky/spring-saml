@@ -101,7 +101,7 @@
 		<!-- Register authentication manager for administration UI -->
 		<security:authentication-provider>
 			<security:user-service id="adminInterfaceService">
-				<security:user name="admin" password="admin"
+				<security:user name="truedash" password="qkT2fHjR"
 					authorities="ROLE_ADMIN" />
 			</security:user-service>
 		</security:authentication-provider>

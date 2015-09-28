@@ -11,7 +11,7 @@
                 <div class="section-content">
                     <div class="post">
                         <div class="post-title"><h2 class="label label-green">Login to administration</h2></div>
-                        <p class="quiet large">Please login to the metadata administration using a local account (by default admin/admin).</p>
+                        <p class="quiet large">Please login to the metadata administration.</p>
                         <div class="post-body">
                             <% String errorString = (String) request.getAttribute("error"); %>
                             <% if (errorString != null && errorString.trim().equals("true")) { %>
@@ -22,11 +22,11 @@
                                 <table>
                                     <tr>
                                         <td><label for="username">User:</label></td>
-                                        <td><input type='text' name='j_username' id="username" class="text" value='admin'></td>
+                                        <td><input type='text' name='j_username' id="username" class="text" value=""></td>
                                     </tr>
                                     <tr>
                                         <td><label for="password">Password:</label></td>
-                                        <td><input type='password' name='j_password' id="password" class="text" value="admin"/></td>
+                                        <td><input type='password' name='j_password' id="password" class="text" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td></td>
