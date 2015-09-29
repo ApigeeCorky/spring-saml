@@ -13,11 +13,13 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.UrlUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /*
  * TODO:improve this class for better
  */
+@Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
 	private final Logger logger = LoggerFactory.getLogger(LoginFailureHandler.class);

@@ -9,6 +9,7 @@ import org.opensaml.xml.security.credential.Credential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.saml.key.KeyManager;
 import org.springframework.security.saml.metadata.*;
 import org.springframework.security.saml.util.SAMLUtil;
@@ -48,9 +49,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/redirect")
 public class RedirectController {
 	
+	 private final Logger log = LoggerFactory.getLogger(RedirectController.class);
+	 
 	@RequestMapping(value = "/truedash")
-    public String generateMetadata(HttpServletRequest request, HttpServletResponse response) {
-
+    public String generateMetadata(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+		if(authentication != null) {
+			log.info("***** auth found  *** " +authentication.getName());
+		}else{
+			log.info("********No auth found redirecting to saml login page***");
+			 return "redirect:/saml/login";
+		}
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
