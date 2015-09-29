@@ -56,7 +56,8 @@ public class RedirectController {
 		if(authentication != null) {
 			log.info("***** auth found  *** " +authentication.getName());
 		}else{
-			log.info("********No auth found***");
+			log.info("********No auth found redirecting to saml login page***");
+			 return "redirect:/saml/login";
 		}
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
