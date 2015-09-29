@@ -9,14 +9,15 @@
 	<context:annotation-config />
 
 	<!-- Scan for auto-wiring classes in spring saml packages -->
-	<context:component-scan base-package="com.truedash.security" />
+	<context:component-scan base-package="com.truedash.security.saml" />
 
 	<!-- Unsecured pages -->
 	<security:http security="none" pattern="/favicon.ico" />
 	<security:http security="none" pattern="/images/**" />
 	<security:http security="none" pattern="/css/**" />
 	<security:http security="none" pattern="/logout.jsp" />
-	
+	<security:http security="none" pattern="/user" />
+
 	<!-- Security for the administration UI -->
 	<security:http pattern="/saml/web/**" use-expressions="false">
 		<security:access-denied-handler
@@ -25,7 +26,8 @@
 			login-page="/saml/web/metadata/login" default-target-url="/saml/web/metadata" />
 		<security:intercept-url pattern="/saml/web/metadata/login"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		
+		<security:intercept-url pattern="/saml/web/redirect/truedash"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />	
 		<security:intercept-url pattern="/saml/web/**"
 			access="ROLE_ADMIN" />
 		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" 
@@ -37,8 +39,6 @@
 		use-expressions="false">
 		<security:intercept-url pattern="/**"
 			access="IS_AUTHENTICATED_FULLY" />
-		<!-- <security:intercept-url pattern="/saml/web/redirect/truedash"
-			access="IS_AUTHENTICATED_FULLY" />	 -->
 		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" 
 			/> -->
 		<security:custom-filter after="BASIC_AUTH_FILTER"
@@ -49,9 +49,6 @@
 	<bean id="samlFilter" class="org.springframework.security.web.FilterChainProxy">
 		<security:filter-chain-map request-matcher="ant">
 			<security:filter-chain pattern="/saml/login/**"
-				filters="samlEntryPoint" />
-			<!-- custom route added by raj -->
-			<security:filter-chain pattern="/saml/redirect/**"
 				filters="samlEntryPoint" />
 			<security:filter-chain pattern="/saml/logout/**"
 				filters="samlLogoutFilter" />
@@ -75,7 +72,7 @@
 	</bean> -->
 	<bean id="successRedirectHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<property name="defaultTargetUrl" value="/saml/redirect" />
+		<property name="defaultTargetUrl" value="/saml/web/redirect/truedash" />
 	</bean>
 	<!-- Use the following for interpreting RelayState coming from unsolicited 
 		response as redirect URL: <bean id="successRedirectHandler" class="org.springframework.security.saml.SAMLRelayStateSuccessHandler"> 
@@ -101,7 +98,7 @@
 		<!-- Register authentication manager for administration UI -->
 		<security:authentication-provider>
 			<security:user-service id="adminInterfaceService">
-				<security:user name="truedash" password="qkT2fHjR"
+				<security:user name="admin" password="admin"
 					authorities="ROLE_ADMIN" />
 			</security:user-service>
 		</security:authentication-provider>

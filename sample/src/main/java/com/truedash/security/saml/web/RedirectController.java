@@ -1,18 +1,35 @@
-package com.truedash.security.routes;
+package com.truedash.security.saml.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.opensaml.common.xml.SAMLConstants;
+import org.opensaml.saml2.metadata.EntityDescriptor;
+import org.opensaml.saml2.metadata.provider.MetadataProvider;
+import org.opensaml.saml2.metadata.provider.MetadataProviderException;
+import org.opensaml.xml.io.MarshallingException;
+import org.opensaml.xml.security.credential.Credential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.saml.key.KeyManager;
+import org.springframework.security.saml.metadata.*;
+import org.springframework.security.saml.util.SAMLUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate; 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.InternalResourceView;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.*;
+import java.util.*;
+import java.lang.*;
+import org.json.*;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder; 
 
 //import com.jcg.example.bean.UserBean;
 
@@ -29,20 +46,18 @@ import org.springframework.web.client.RestTemplate;
 **/
 
 @Controller
-@RequestMapping("/saml")
+@RequestMapping("/redirect")
 public class RedirectController {
 	
-	private final Logger log = LoggerFactory.getLogger(RedirectController.class);
-	
-	@RequestMapping(value = "/redirect")
+	 private final Logger log = LoggerFactory.getLogger(RedirectController.class);
+	 
+	@RequestMapping(value = "/truedash")
     public String generateMetadata(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-		
-		if(authentication == null){
-			log.info("******No athentication object found****");
-		} else{
-			log.info(authentication.getName());
+		if(authentication != null) {
+			log.info("***** auth found  *** " +authentication.getName());
+		}else{
+			log.info("********No auth found***");
 		}
-		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
