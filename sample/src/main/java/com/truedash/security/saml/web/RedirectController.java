@@ -80,7 +80,7 @@ public class RedirectController {
 		
 		DBObject user = coll.findOne(query);		
 		
-		if (!user) {
+		if (user == null) {
 			throw new RuntimeException("User not found!!!");
 		}
 
