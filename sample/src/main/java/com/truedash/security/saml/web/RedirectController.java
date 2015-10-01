@@ -30,6 +30,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder; 
+import com.mongodb.*;
 
 //import com.jcg.example.bean.UserBean;
 
@@ -69,7 +70,25 @@ public class RedirectController {
 		params.put("password", "nimda");
 		params.put("orgName", "Org1");
 		
+		MongoClient mongoClient = new MongoClient("54.77.71.231", 27017);
+		DB db = mongoClient.getDB("datawarehouse");
+		
+		
+		DBCollection coll = db.getCollection("user");
+		
+		BasicDBObject query = new BasicDBObject("username", "testmv");	
+		
+		DBObject user = coll.findOne(query);		
+		
+		if (!user) {
+			throw new RuntimeException("User not found!!!");
+		}
 
+		BasicDBObject newDocument = new BasicDBObject();
+		newDocument.append("$set", new BasicDBObject().append("samlKey", "key"));		
+
+		coll.update(query, newDocument);
+		
 		String url = "";
 		url = "https://dev.truedash.com/truedash/user/samlLogin?username=testmv&password=nimda&orgName=Org1";
 		//url = "http://localhost:8081/truedash/user/samlLogin?username=testmv&password=nimda&orgName=Org1";
@@ -94,4 +113,10 @@ public class RedirectController {
 	    return "redirect:" + url;
 
     }
+	
+	private void connectToMongo() {
+		MongoClient mongoClient = new MongoClient("54.77.71.231", 27017);
+		DB db = mongoClient.getDB("datawarehouse");
+		System.out.println(db);
+	}
 }
