@@ -60,6 +60,8 @@ public class RedirectController {
 			log.info("********No auth found redirecting to saml login page***");
 			 return "redirect:/saml/login";
 		}
+		String userName = authentication.getName();
+		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
@@ -70,7 +72,8 @@ public class RedirectController {
 		params.put("password", "nimda");
 		params.put("orgName", "Org1");
 		
-		MongoClient mongoClient = new MongoClient("54.77.71.231", 27017);
+		//TODO: When using in local pls use: 54.77.71.231
+		MongoClient mongoClient = new MongoClient("172.17.2.214", 27017);
 		DB db = mongoClient.getDB("datawarehouse");
 		
 		
@@ -90,7 +93,7 @@ public class RedirectController {
 		coll.update(query, newDocument);
 		
 		String url = "";
-		url = "https://dev.truedash.com/truedash/user/samlLogin?username=testmv&password=nimda&orgName=Org1";
+		url = "https://dev.truedash.com/truedash/user/samlLogin?username=" + userName + "&password=nimda&orgName=Org1";
 		//url = "http://localhost:8081/truedash/user/samlLogin?username=testmv&password=nimda&orgName=Org1";
 		System.out.println(params);
 		//HttpEntity entity = new HttpEntity(headers);
