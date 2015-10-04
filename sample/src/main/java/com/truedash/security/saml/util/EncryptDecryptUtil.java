@@ -1,4 +1,4 @@
-package com.truedash.seccurity.util;
+package com.truedash.security.saml.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
