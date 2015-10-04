@@ -4,7 +4,7 @@
     <meta name="description" content="Truedash SSO Application"/>
     <meta name="keywords" content="saml,spring,spring-security" />
     <meta name="author" content="Rajender Nagulapalle" />
-    <link rel="icon" type="image/png" href="/images/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen" />
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" media="screen" />
     <title>Truedash SSO Application</title>
 </head>
