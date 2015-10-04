@@ -29,7 +29,8 @@ import org.json.*;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder; 
+import org.springframework.web.util.UriComponentsBuilder;
+import com.truedash.security.saml.util.*;
 import com.mongodb.*;
 
 //import com.jcg.example.bean.UserBean;
@@ -61,7 +62,7 @@ public class RedirectController {
 			 return "redirect:/saml/login";
 		}
 		String userName = authentication.getName();
-		
+		//String userName = "testmv";
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
@@ -73,6 +74,7 @@ public class RedirectController {
 		params.put("orgName", "Org1");
 		
 		//TODO: When using in local pls use: 54.77.71.231
+		//MongoClient mongoClient = new MongoClient("54.77.71.231", 27017);
 		MongoClient mongoClient = new MongoClient("172.17.2.214", 27017);
 		DB db = mongoClient.getDB("datawarehouse");
 		
@@ -88,13 +90,20 @@ public class RedirectController {
 		}
 
 		BasicDBObject newDocument = new BasicDBObject();
-		newDocument.append("$set", new BasicDBObject().append("samlKey", "key"));		
+		String key = null; 
+        try {
+        	key = EncryptDecryptUtil.encrypt(userName);        	  
+        } catch (Exception e) {
+        	
+        }
+				
+		newDocument.append("$set", new BasicDBObject().append("samlKey", key));		
 
 		coll.update(query, newDocument);
 		
 		String url = "";
-		url = "https://dev.truedash.com/truedash/user/samlLogin?username=" + userName + "&password=nimda&orgName=Org1";
-		//url = "http://localhost:8081/truedash/user/samlLogin?username=testmv&password=nimda&orgName=Org1";
+		url = "https://dev.truedash.com/truedash/user/samlLogin?key="+ key +"&password=nimda";
+		//url = "http://localhost:8081/truedash/user/samlLogin?key="+ key +"&password=nimda";
 		System.out.println(params);
 		//HttpEntity entity = new HttpEntity(headers);
 		
