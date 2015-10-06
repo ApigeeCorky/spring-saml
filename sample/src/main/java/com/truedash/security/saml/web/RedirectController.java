@@ -62,7 +62,7 @@ public class RedirectController {
 			 return "redirect:/saml/login";
 		}
 		String userName = authentication.getName();
-		//String userName = "testmv";
+		//String userName = "dariusz.zbik";
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
@@ -81,7 +81,7 @@ public class RedirectController {
 		
 		DBCollection coll = db.getCollection("user");
 		
-		BasicDBObject query = new BasicDBObject("username", "testmv");	
+		BasicDBObject query = new BasicDBObject("username", userName);	
 		
 		DBObject user = coll.findOne(query);		
 		
@@ -102,8 +102,8 @@ public class RedirectController {
 		coll.update(query, newDocument);
 		
 		String url = "";
-		url = "https://dev.truedash.com/truedash/user/samlLogin?key="+ key +"&password=nimda";
-		//url = "http://localhost:8081/truedash/user/samlLogin?key="+ key +"&password=nimda";
+		url = "https://dev.truedash.com/truedash/user/samlLogin?key="+ key;
+		//url = "http://localhost:8081/truedash/user/samlLogin?key="+ key;
 		System.out.println(params);
 		//HttpEntity entity = new HttpEntity(headers);
 		
