@@ -102,7 +102,7 @@ public class RedirectController {
 		coll.update(query, newDocument);
 		
 		String url = "";
-		url = "https://dev.truedash.com/truedash/user/samlLogin?key="+ key;
+		url = "https://dev.truedash.com/login?key="+ key;
 		//url = "http://localhost:8081/truedash/user/samlLogin?key="+ key;
 		System.out.println(params);
 		//HttpEntity entity = new HttpEntity(headers);
