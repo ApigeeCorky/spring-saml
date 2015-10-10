@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,9 @@ public class RedirectController {
 	
 	 private final Logger log = LoggerFactory.getLogger(RedirectController.class);
 	 
+	 @Autowired
+	 private MongoOperations mongoOperations;
+	 
 	@RequestMapping(value = "/truedash")
     public String generateMetadata(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws UnauthorizedException, IllegalBlockSizeException {
 		
@@ -32,6 +37,11 @@ public class RedirectController {
 		}else{
 			log.info("********No auth found redirecting to saml login page***");
 			 return "redirect:/saml/login";
+		}
+		//check collection exists
+		if (mongoOperations.collectionExists("user")) {
+			//mongoOperations.dropCollection(Person.class);
+			log.info("*****USER COLLECTION FOUND IN THE DB******");
 		}
 		
 		String userName = authentication.getName();
