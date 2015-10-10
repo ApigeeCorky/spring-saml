@@ -62,13 +62,13 @@ public class RedirectController {
 		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
 		        }
 		        
-				Update update = new Update();
+				//Update update = new Update();
 				String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
-				update.set("samlKey", encodedSamlKey);
-				WriteResult results = mongoOperations.updateFirst(query, update, "user");
+				//Update.update("samlKey", encodedSamlKey);
+				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", encodedSamlKey), "user");
 				
 				log.info("ACKS" + results.wasAcknowledged());
-				log.info(update.toString());
+				//log.info(update.toString());
 				
 				String url = "https://dev.truedash.com/login?key="+ encodedSamlKey;
 			    return "redirect:" + url;
