@@ -28,6 +28,7 @@ public class EncryptDecryptUtil {
 	public static String username = "truedash@secretkey.me";
     public static String password = "dummypasswordchangeme";
     public static String SALT2 = "truedash_salt_yummy!";
+    
     public static Cipher cipher;
     
     public static String encrypt(String text) throws IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException{
