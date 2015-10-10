@@ -66,8 +66,9 @@ public class RedirectController {
 				String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
 				//Update.update("samlKey", encodedSamlKey);
 				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", encodedSamlKey), "user");
-				log.info(query.toString());
-				log.info("ACKS" + results.wasAcknowledged());
+				
+				log.debug(query.toString());
+				log.debug("ACKS flag " + results.wasAcknowledged());
 				//log.info(update.toString());
 				
 				String url = "https://dev.truedash.com/login?key="+ encodedSamlKey;
