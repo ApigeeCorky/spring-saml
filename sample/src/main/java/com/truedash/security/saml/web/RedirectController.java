@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,15 +43,29 @@ public class RedirectController {
 			log.info("********No auth found redirecting to saml login page***");
 			 return "redirect:/saml/login";
 		}
-		String userName = authentication.getName();
+		//String userName = authentication.getName();
+		//TODO: remove hard coded username and uncomment above line
+		String userName = "dariusz.zbik";
 		//check collection exists
 		if (mongoOperations.collectionExists("user")) {
 			//mongoOperations.dropCollection(Person.class);
 			log.info("*****USER COLLECTION FOUND IN THE DB******");
 			Query query = new Query();
-			query.addCriteria(Criteria.where("username").is("dariusz.zbik"));
+			query.addCriteria(Criteria.where("username").is(userName));
 			if(mongoOperations.exists(query, "user")){
 				log.info("Authorized username {} found in the request...", userName);
+				//update document with query
+				String samlKey = null; 
+		        try {
+		        	samlKey = EncryptDecryptUtil.encrypt(userName);        	  
+		        } catch (Exception e) {
+		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
+		        }
+				Update update = new Update();
+				update.set("samlKey", samlKey);
+				mongoOperations.updateFirst(query, update, "user");
+				String url = "https://dev.truedash.com/login?key="+ samlKey;
+			    return "redirect:" + url;
 			}else{
 				
 				log.error("Unauthorized username {} found in the request...", userName);
@@ -59,36 +74,6 @@ public class RedirectController {
 		} else{
 			throw new NoSuchResourceFound("No collection found in db..");
 		}
-		
-		MongoClient mongoClient = new MongoClient("172.17.2.214", 27017);
-		DB db = mongoClient.getDB("datawarehouse");
-		
-		
-		DBCollection coll = db.getCollection("user");
-		
-		BasicDBObject query = new BasicDBObject("username", userName);	
-		
-		DBObject user = coll.findOne(query);		
-		
-		if (user == null) {
-			throw new UnauthorizedException(userName + " user not authorized");
-		}
-
-		BasicDBObject newDocument = new BasicDBObject();
-		String key = null; 
-        try {
-        	key = EncryptDecryptUtil.encrypt(userName);        	  
-        } catch (Exception e) {
-        	throw new IllegalBlockSizeException(userName + " encrypting failed");
-        }
-				
-		newDocument.append("$set", new BasicDBObject().append("samlKey", key));		
-
-		coll.update(query, newDocument);
-		
-		String url = "https://dev.truedash.com/login?key="+ key;
-		
-	    return "redirect:" + url;
 
     }
 }
