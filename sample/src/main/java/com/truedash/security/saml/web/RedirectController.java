@@ -1,5 +1,7 @@
 package com.truedash.security.saml.web;
 
+import java.util.Calendar;
+
 import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,14 +54,15 @@ public class RedirectController {
 				//update document with query
 				String samlKey = null; 
 		        try {
-		        	samlKey = EncryptDecryptUtil.encrypt(userName);        	  
+		        	Calendar cal = Calendar.getInstance();
+		        	samlKey = EncryptDecryptUtil.encrypt(userName+":"+cal.getTimeInMillis());        	  
 		        } catch (Exception e) {
 		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
 		        }
 				Update update = new Update();
 				update.set("samlKey", samlKey);
 				WriteResult results = mongoOperations.updateFirst(query, update, "user");
-				log.info("number... " + results.getN());
+				log.info("number... " + results.toString());
 				log.info(update.toString());
 				String url = "https://dev.truedash.com/login?key="+ samlKey;
 			    return "redirect:" + url;
