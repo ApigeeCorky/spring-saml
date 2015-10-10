@@ -16,6 +16,16 @@
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
 		<property name="host" value="172.17.2.214" />
 		<property name="port" value="27017"></property>
+		<property name="MongoOptions" ref="mongoOptions"></property>
+	</bean>
+	
+	<bean id="mongoOptions" class="com.mongodb.MongoOptions">
+		<property name="connectionsPerHost" value="10"></property>
+		<property name="connectTimeout" value="1000"></property>
+		<property name="maxWaitTime" value="1500"></property>
+		<property name="socketTimeout" value="1500"></property>
+		<property name="threadsAllowedToBlockForConnectionMultiplier" value="4"></property>
+		<property name="socketKeepAlive" value="true"></property>
 	</bean>
 
 	<!-- Use this post processor to translate any MongoExceptions thrown in 
