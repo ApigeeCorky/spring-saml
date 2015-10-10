@@ -54,20 +54,25 @@ public class RedirectController {
 				log.info("Authorized username {} found in the request...", userName);
 				//update document with query
 				String samlKey = null; 
-		        try {
+		        
+				try {
 		        	Calendar cal = Calendar.getInstance();
 		        	samlKey = EncryptDecryptUtil.encrypt(userName+":"+cal.getTimeInMillis());        	  
 		        } catch (Exception e) {
 		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
 		        }
+		        
 				Update update = new Update();
 				String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
 				update.set("samlKey", encodedSamlKey);
 				WriteResult results = mongoOperations.updateFirst(query, update, "user");
-				log.info("number... " + results.toString());
+				
+				log.info("ACKS" + results.wasAcknowledged());
 				log.info(update.toString());
+				
 				String url = "https://dev.truedash.com/login?key="+ encodedSamlKey;
 			    return "redirect:" + url;
+			    
 			}else{
 				
 				log.error("Unauthorized username {} found in the request...", userName);
