@@ -61,7 +61,6 @@ public class RedirectController {
 				WriteResult results = mongoOperations.updateFirst(query, update, "user");
 				log.info("number... " + results.getN());
 				log.info(update.toString());
-				
 				String url = "https://dev.truedash.com/login?key="+ samlKey;
 			    return "redirect:" + url;
 			}else{
