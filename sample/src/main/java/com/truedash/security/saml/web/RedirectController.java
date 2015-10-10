@@ -41,9 +41,9 @@ public class RedirectController {
 			log.info("********No auth found redirecting to saml login page***");
 			 return "redirect:/saml/login";
 		}
-		String userName = authentication.getName();
+		//String userName = authentication.getName();
 		//TODO: remove hard coded username and uncomment above line
-		//String userName = "dariusz.zbik";
+		String userName = "dariusz.zbik";
 		//check collection exists
 		if (mongoOperations.collectionExists("user")) {
 			//mongoOperations.dropCollection(Person.class);
