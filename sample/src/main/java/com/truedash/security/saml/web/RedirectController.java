@@ -6,6 +6,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +61,12 @@ public class RedirectController {
 		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
 		        }
 				Update update = new Update();
-				update.set("samlKey", samlKey);
+				String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
+				update.set("samlKey", encodedSamlKey);
 				WriteResult results = mongoOperations.updateFirst(query, update, "user");
 				log.info("number... " + results.toString());
 				log.info(update.toString());
-				String url = "https://dev.truedash.com/login?key="+ samlKey;
+				String url = "https://dev.truedash.com/login?key="+ encodedSamlKey;
 			    return "redirect:" + url;
 			}else{
 				
