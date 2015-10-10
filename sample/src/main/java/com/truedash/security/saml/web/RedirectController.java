@@ -4,7 +4,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.opensaml.ws.wssecurity.Username;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import com.mongodb.WriteResult;
 import com.truedash.security.exception.NoSuchResourceFound;
 import com.truedash.security.exception.UnauthorizedException;
 import com.truedash.security.saml.util.EncryptDecryptUtil;
@@ -63,7 +58,10 @@ public class RedirectController {
 		        }
 				Update update = new Update();
 				update.set("samlKey", samlKey);
-				mongoOperations.updateFirst(query, update, "user");
+				WriteResult results = mongoOperations.updateFirst(query, update, "user");
+				log.info("number... " + results.getN());
+				log.info(update.toString());
+				
 				String url = "https://dev.truedash.com/login?key="+ samlKey;
 			    return "redirect:" + url;
 			}else{
