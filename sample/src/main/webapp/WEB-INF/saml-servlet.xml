@@ -57,19 +57,19 @@
 			</list>
 		</property>
 	</bean>
-    <!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     	<constructor-arg name="mongo" ref="mongo"/>
     	<constructor-arg name="databaseName" value="datawarehouse"/>
-    	<constructor-arg name="defaultCollectionName" value="user"/>
+    	<!-- <constructor-arg name="defaultCollectionName" value="user"/> -->
     </bean>
 
-	Factory bean that creates the Mongo instance
+	<!-- Factory bean that creates the Mongo instance -->
     <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
     	<property name="host" value="172.17.2.214"/>
     	<property name="port" value="27017"></property>
     </bean>
     
-	Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
+	<!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
+	<!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
     
 </beans>
