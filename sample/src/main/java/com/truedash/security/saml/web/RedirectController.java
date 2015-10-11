@@ -63,15 +63,15 @@ public class RedirectController {
 		        }
 		        
 				//Update update = new Update();
-				String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
+				//String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
 				//Update.update("samlKey", encodedSamlKey);
-				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", encodedSamlKey), "user");
+				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", samlKey), "user");
 				
 				log.debug(query.toString());
 				log.debug("ACKS flag " + results.wasAcknowledged());
 				//log.info(update.toString());
 				
-				String url = "https://dev.truedash.com/login?key="+ encodedSamlKey;
+				String url = "https://dev.truedash.com/login?key="+ samlKey;
 			    return "redirect:" + url;
 			    
 			}else{
