@@ -67,11 +67,11 @@ public class RedirectController {
 				//Update.update("samlKey", encodedSamlKey);
 				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", samlKey), "user");
 				
-				log.debug(query.toString());
-				log.debug("ACKS flag " + results.wasAcknowledged());
-				//log.info(update.toString());
+				log.info(query.toString());
+				log.info("ACKS flag " + results.wasAcknowledged());
 				
 				String url = "https://dev.truedash.com/login?key="+ samlKey;
+				log.info("user being redirected to " + url);
 			    return "redirect:" + url;
 			    
 			}else{
