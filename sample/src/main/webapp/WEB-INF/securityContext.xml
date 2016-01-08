@@ -225,7 +225,7 @@
 							</constructor-arg>
 							<constructor-arg>
 								<bean class="org.opensaml.util.resource.ClasspathResource">
-									<constructor-arg value="/metadata/idp-meta.xml" />
+									<constructor-arg value="/metadata/OcadoSSO_prod_IdP_metadata.xml" />
 								</bean>
 							</constructor-arg>
 							<property name="parserPool" ref="parserPool" />

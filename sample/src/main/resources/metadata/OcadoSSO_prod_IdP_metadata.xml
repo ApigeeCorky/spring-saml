@@ -1,0 +1,75 @@
+<EntitiesDescriptor
+        xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+        xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+        >
+
+    <EntityDescriptor entityID="https://login.cit.lastmile.com/">
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <KeyDescriptor>
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIIHjzCCBnegAwIBAgIKaBWDMQAAAADXaTANBgkqhkiG9w0BAQUFADBVMRMwEQYK
+                            CZImiZPyLGQBGRYDY29tMRUwEwYKCZImiZPyLGQBGRYFb2NhZG8xJzAlBgNVBAMT
+                            Hk9jYWRvIEx0ZCBDb3Jwb3JhdGUgSXNzdWluZyBDQTAeFw0xNDA2MjYxMjAwNDda
+                            Fw0xNjA2MjUxMjAwNDdaMIGzMQswCQYDVQQGEwJHQjEWMBQGA1UECBMNSGVydGZv
+                            cmRzaGlyZTERMA8GA1UEBxMISGF0ZmllbGQxDjAMBgNVBAoTBU9jYWRvMSkwJwYD
+                            VQQLEyBPY2FkbyBJbnRlcm5hbCBBcHBsaWNhdGlvbiBVc2VyczEWMBQGA1UEAxMN
+                            YWltLm9jYWRvLmNvbTEmMCQGCSqGSIb3DQEJARYXYWltLm9jYWRvLmNvbUBvY2Fk
+                            by5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvUFn+7yJNZ+nB
+                            DT+vqF1JiCwjJtJ75T8wz+wSNdDRzG3HRU3uB/VzZ4zN1xa+TBm+oA2K39kjPd95
+                            5x5QRcyzuM2G0kbeAkemCKRGx5YRfnDwb5gNVsol4S/+WWQpPEp5FKavmbLMZgXb
+                            ZY2yAGrGsoccD7w3Ex6yWtqxXi4zaLPX4uBbq5FsP9bzd81ePRv8rTo3bszvzPux
+                            jRDPDkuIhEEOCeJ4rAf5GSKdq5akXHJILfWezgSyas9qePr+9Is2mQ8xRtbJgOd5
+                            Habq6GUGE6tHqqC2QI+FiO3fpms7MtpgDEE2BmSVMCwF76GFM0xWUOgEZfB75nwh
+                            qI1sVZs1AgMBAAGjggQAMIID/DAdBgNVHQ4EFgQU+00J8HopPpWxzMWM7YSKbQKM
+                            8qwwHwYDVR0jBBgwFoAUlTEs8kcdaAKsTHR94y2Sj/oO2GEwggF+BgNVHR8EggF1
+                            MIIBcTCCAW2gggFpoIIBZYaBymxkYXA6Ly8vQ049T2NhZG8lMjBMdGQlMjBDb3Jw
+                            b3JhdGUlMjBJc3N1aW5nJTIwQ0EsQ049YXphemVsLENOPUNEUCxDTj1QdWJsaWMl
+                            MjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERD
+                            PW9jYWRvLERDPWNvbT9jZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0P2Jhc2U/b2Jq
+                            ZWN0Q2xhc3M9Y1JMRGlzdHJpYnV0aW9uUG9pbnSGTWh0dHA6Ly9hemF6ZWwub2Nh
+                            ZG8uY29tL0NlcnRFbnJvbGwvT2NhZG8lMjBMdGQlMjBDb3Jwb3JhdGUlMjBJc3N1
+                            aW5nJTIwQ0EuY3JshkdmaWxlOi8vXFxhemF6ZWwub2NhZG8uY29tXENlcnRFbnJv
+                            bGxcT2NhZG8gTHRkIENvcnBvcmF0ZSBJc3N1aW5nIENBLmNybDCCAaoGCCsGAQUF
+                            BwEBBIIBnDCCAZgwgcMGCCsGAQUFBzAChoG2bGRhcDovLy9DTj1PY2FkbyUyMEx0
+                            ZCUyMENvcnBvcmF0ZSUyMElzc3VpbmclMjBDQSxDTj1BSUEsQ049UHVibGljJTIw
+                            S2V5JTIwU2VydmljZXMsQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1v
+                            Y2FkbyxEQz1jb20/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRp
+                            ZmljYXRpb25BdXRob3JpdHkwagYIKwYBBQUHMAKGXmh0dHA6Ly9hemF6ZWwub2Nh
+                            ZG8uY29tL0NlcnRFbnJvbGwvYXphemVsLm9jYWRvLmNvbV9PY2FkbyUyMEx0ZCUy
+                            MENvcnBvcmF0ZSUyMElzc3VpbmclMjBDQS5jcnQwZAYIKwYBBQUHMAKGWGZpbGU6
+                            Ly9cXGF6YXplbC5vY2Fkby5jb21cQ2VydEVucm9sbFxhemF6ZWwub2NhZG8uY29t
+                            X09jYWRvIEx0ZCBDb3Jwb3JhdGUgSXNzdWluZyBDQS5jcnQwDAYDVR0TAQH/BAIw
+                            ADALBgNVHQ8EBAMCBaAwPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGCNxUIhemiKYTA
+                            12SH3ZkogszJK4XE8WKBY/SoSYWbmlUCAWQCAQQwEwYDVR0lBAwwCgYIKwYBBQUH
+                            AwEwGwYJKwYBBAGCNxUKBA4wDDAKBggrBgEFBQcDATANBgkqhkiG9w0BAQUFAAOC
+                            AQEAWCe92nWsNg5Ko7Z9l0Ey9vq8+4OEdxkDh3QJZiw7GMB9+3I3rI++cHQfFjCi
+                            sDfUs0pp1L8ENvYpGEsD8rSxvj5RmEpOtH+GOkYbtM/RX1lqDHnfRzJ7ser3py0A
+                            GlHkmyLKJEUrZ4gAT5AITm70I7YwnPAyB9eEec/nJL3yz9uyvd8pLJfqO+VnpGEz
+                            H2EearaeLQtbIWgD0hZ/7V7KmkGrlbTy1AU7ylJ8siVf7+yiOg/hB19v90djBx9U
+                            ZBqXhe2VfMJqHkQc0/9L27OPny08aWaQwnYRP1BDG7lxJ6SqBQ7J8v2RMO9LPz90
+                            2gYAQNDS+ocRGPg6jZHO8CdTKQ==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </KeyDescriptor>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                 Location="https://login.lastmile.com/pandasso/saml2/login"/>
+            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                 Location="https://login.lastmile.com/pandasso/saml2/logout"/>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                 Location="https://login.lastmile.com/pandasso/saml2/login"/>
+            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                 Location="https://login.lastmile.com/pandasso/saml2/logout"/>
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Ocado Identity</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Ocado Identity</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://www.ocado.com/</OrganizationURL>
+        </Organization>
+    </EntityDescriptor>
+</EntitiesDescriptor>
