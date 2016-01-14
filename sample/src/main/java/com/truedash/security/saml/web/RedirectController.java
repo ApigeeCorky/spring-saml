@@ -6,7 +6,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.InternalResourceView;
 
 import com.mongodb.WriteResult;
 import com.truedash.security.exception.NoSuchResourceFound;
@@ -26,62 +27,73 @@ import com.truedash.security.saml.util.EncryptDecryptUtil;
 @Controller
 @RequestMapping("/redirect")
 public class RedirectController {
-	
-	 private final Logger log = LoggerFactory.getLogger(RedirectController.class);
-	 
-	 @Autowired
-	 private MongoOperations mongoOperations;
-	 
-	@RequestMapping(value = "/truedash")
-    public String generateMetadata(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws UnauthorizedException, IllegalBlockSizeException, NoSuchResourceFound {
+
+	private final Logger log = LoggerFactory.getLogger(RedirectController.class);
+
+	@Autowired
+	private MongoOperations mongoOperations;
+
+	@RequestMapping(value = "/401")
+	public ModelAndView errorPage(HttpServletRequest request) {
 		
-		if(authentication != null) {
-			log.info("***** auth found  *** " +authentication.getName());
-		}else{
+		return new ModelAndView(new InternalResourceView("/401.jsp", true));
+	}
+
+	@RequestMapping(value = "/truedash")
+	public ModelAndView generateMetadata(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication)
+					throws UnauthorizedException, IllegalBlockSizeException, NoSuchResourceFound {
+
+		if (authentication != null) {
+			log.info("***** auth found  *** " + authentication.getName());
+		} else {
 			log.info("********No auth found redirecting to saml login page***");
-			 return "redirect:/saml/login";
+			return new ModelAndView("redirect:/saml/login");
 		}
 		String userName = authentication.getName();
-		//TODO: remove hard coded username and uncomment above line
-		//String userName = "dariusz.zbik";
-		//check collection exists
+		// TODO: remove hard coded username and uncomment above line
+		// String userName = "dariusz.zbik";
+		// check collection exists
 		if (mongoOperations.collectionExists("user")) {
-			//mongoOperations.dropCollection(Person.class);
+			// mongoOperations.dropCollection(Person.class);
 			log.info("*****USER COLLECTION FOUND IN THE DB******");
 			Query query = new Query();
 			query.addCriteria(Criteria.where("username").is(userName));
-			if(mongoOperations.exists(query, "user")){
+			if (mongoOperations.exists(query, "user")) {
 				log.info("Authorized username {} found in the request...", userName);
-				//update document with query
-				String samlKey = null; 
-		        
+				// update document with query
+				String samlKey = null;
+
 				try {
-		        	Calendar cal = Calendar.getInstance();
-		        	samlKey = EncryptDecryptUtil.encrypt(userName+":"+cal.getTimeInMillis());        	  
-		        } catch (Exception e) {
-		        	throw new IllegalBlockSizeException(userName + " encrypting failed");
-		        }
-		        
-				//Update update = new Update();
-				//String encodedSamlKey = new String(Base64.encodeBase64(samlKey.getBytes()));
-				//Update.update("samlKey", encodedSamlKey);
+					Calendar cal = Calendar.getInstance();
+					samlKey = EncryptDecryptUtil.encrypt(userName + ":" + cal.getTimeInMillis());
+				} catch (Exception e) {
+					throw new IllegalBlockSizeException(userName + " encrypting failed");
+				}
+
+				// Update update = new Update();
+				// String encodedSamlKey = new
+				// String(Base64.encodeBase64(samlKey.getBytes()));
+				// Update.update("samlKey", encodedSamlKey);
 				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", samlKey), "user");
-				
+
 				log.info(query.toString());
 				log.info("ACKS flag " + results.wasAcknowledged());
-				
-				String url = "https://dev.truedash.com/login?key="+ samlKey;
+
+				String url = "https://dev.truedash.com/login?key=" + samlKey;
 				log.info("user being redirected to " + url);
-			    return "redirect:" + url;
-			    
-			}else{
-				
+				return new ModelAndView("redirect:" + url);
+
+			} else {
+
 				log.error("Unauthorized username {} found in the request...", userName);
-				throw new UnauthorizedException(userName + " user not authorized");
+				// throw new UnauthorizedException(userName + " user not
+				// authorized");
+				return new ModelAndView(new InternalResourceView("/401.jsp", true));
 			}
-		} else{
+		} else {
 			throw new NoSuchResourceFound("No collection found in db..");
 		}
 
-    }
+	}
 }
