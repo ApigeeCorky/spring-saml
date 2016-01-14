@@ -80,7 +80,7 @@ public class RedirectController {
 				log.info(query.toString());
 				log.info("ACKS flag " + results.wasAcknowledged());
 
-				String url = "https://dev.truedash.com/login?key=" + samlKey;
+				String url = "https://app.truedash.com/login?key=" + samlKey;
 				log.info("user being redirected to " + url);
 				return new ModelAndView("redirect:" + url);
 
