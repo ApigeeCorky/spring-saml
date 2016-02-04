@@ -54,46 +54,52 @@ public class RedirectController {
 		// TODO: remove hard coded username and uncomment above line
 		// String userName = "dariusz.zbik";
 		// check collection exists
-		if (mongoOperations.collectionExists("user")) {
-			// mongoOperations.dropCollection(Person.class);
-			log.info("*****USER COLLECTION FOUND IN THE DB******");
-			Query query = new Query();
-			query.addCriteria(Criteria.where("username").is(userName));
-			if (mongoOperations.exists(query, "user")) {
-				log.info("Authorized username {} found in the request...", userName);
-				// update document with query
-				String samlKey = null;
 
-				try {
-					Calendar cal = Calendar.getInstance();
-					samlKey = EncryptDecryptUtil.encrypt(userName + ":" + cal.getTimeInMillis());
-				} catch (Exception e) {
-					throw new IllegalBlockSizeException(userName + " encrypting failed");
+		try{
+				if (mongoOperations.collectionExists("user")) {
+					log.info("*****USER COLLECTION FOUND IN THE DB******");
+					Query query = new Query();
+					query.addCriteria(Criteria.where("username").is(userName));
+					if (mongoOperations.exists(query, "user")) {
+						log.info("Authorized username {} found in the request...", userName);
+						// update document with query
+						String samlKey = null;
+		
+						try {
+							Calendar cal = Calendar.getInstance();
+							samlKey = EncryptDecryptUtil.encrypt(userName + ":" + cal.getTimeInMillis());
+						} catch (Exception e) {
+							throw new IllegalBlockSizeException(userName + " encrypting failed");
+						} 
+		
+						// Update update = new Update();
+						// String encodedSamlKey = new
+						// String(Base64.encodeBase64(samlKey.getBytes()));
+						// Update.update("samlKey", encodedSamlKey);
+						WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", samlKey), "user");
+		
+						log.info(query.toString());
+						log.info("ACKS flag " + results.wasAcknowledged());
+		
+						String url = "https://app.truedash.com/login?key=" + samlKey;
+						log.info("user being redirected to " + url);
+						return new ModelAndView("redirect:" + url);
+		
+					} else {
+		
+						log.error("Unauthorized username {} found in the request...", userName);
+						// throw new UnauthorizedException(userName + " user not
+						// authorized");
+						return new ModelAndView(new InternalResourceView("/401.jsp", true));
+					}
+				} else {
+					throw new NoSuchResourceFound("No collection found in db..");
 				}
-
-				// Update update = new Update();
-				// String encodedSamlKey = new
-				// String(Base64.encodeBase64(samlKey.getBytes()));
-				// Update.update("samlKey", encodedSamlKey);
-				WriteResult results = mongoOperations.updateFirst(query, Update.update("samlKey", samlKey), "user");
-
-				log.info(query.toString());
-				log.info("ACKS flag " + results.wasAcknowledged());
-
-				String url = "https://app.truedash.com/login?key=" + samlKey;
-				log.info("user being redirected to " + url);
-				return new ModelAndView("redirect:" + url);
-
-			} else {
-
-				log.error("Unauthorized username {} found in the request...", userName);
-				// throw new UnauthorizedException(userName + " user not
-				// authorized");
-				return new ModelAndView(new InternalResourceView("/401.jsp", true));
 			}
-		} else {
-			throw new NoSuchResourceFound("No collection found in db..");
+			 catch (Exception e) {
+					log.info("*****Some sort of error ****** "+e);
 		}
-
+		
+		return new ModelAndView(new InternalResourceView("/401.jsp", true));
 	}
 }
