@@ -95,10 +95,11 @@ public class RedirectController {
 				} else {
 					throw new NoSuchResourceFound("No collection found in db..");
 				}
-		}
+			}
 			 catch (Exception e) {
 					log.info("*****Some sort of error ****** "+e);
 		}
-
+		
+		return new ModelAndView(new InternalResourceView("/401.jsp", true));
 	}
 }
