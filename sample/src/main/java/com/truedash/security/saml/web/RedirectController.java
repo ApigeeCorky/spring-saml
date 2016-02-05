@@ -54,6 +54,8 @@ public class RedirectController {
 		// TODO: remove hard coded username and uncomment above line
 		// String userName = "dariusz.zbik";
 		// check collection exists
+		
+		 System.out.println("got heeer "+58);
 
 		try{
 				if (mongoOperations.collectionExists("user")) {
@@ -97,6 +99,7 @@ public class RedirectController {
 				}
 			}
 			 catch (Exception e) {
+				 System.out.println("got heeer "+e);
 					log.info("*****Some sort of error ****** "+e);
 		}
 		
