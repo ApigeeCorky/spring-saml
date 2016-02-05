@@ -9,18 +9,12 @@
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongo" ref="mongo" />
 		<constructor-arg name="databaseName" value="datawarehouse" />
-		<constructor-arg name="userCredentials" ref="userCredentials"/>
 		<!-- <constructor-arg name="defaultCollectionName" value="user"/> -->
 	</bean>
-	
-	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
-    <constructor-arg name="username" value="username" />
-    <constructor-arg name="password" value="password" />
-</bean>
 
 	<!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<property name="host" value="54.77.71.231" />
+		<property name="host" value="172.17.2.214" />
 		<property name="port" value="27017"></property>
 		<property name="MongoOptions" ref="mongoOptions"></property>
 	</bean>
