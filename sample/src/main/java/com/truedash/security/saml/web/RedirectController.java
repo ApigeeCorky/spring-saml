@@ -50,7 +50,7 @@ public class RedirectController {
 			log.info("********No auth found redirecting to saml login page***");
 			return new ModelAndView("redirect:/saml/login");
 		}
-		String userName = "l.monnington";//authentication.getName();
+		String userName = "manjit";//authentication.getName();
 		// TODO: remove hard coded username and uncomment above line
 		// String userName = "dariusz.zbik";
 		// check collection exists
@@ -100,6 +100,6 @@ public class RedirectController {
 					log.info("*****Some sort of error ****** "+e);
 		}
 		
-		return new ModelAndView(new InternalResourceView("/401.jsp", true));
+		return new ModelAndView(new InternalResourceView("/error.jsp", true));
 	}
 }
