@@ -58,6 +58,14 @@ public class RedirectController {
 		 System.out.println("got heeer "+58);
 
 		try{
+			mongoOperations.collectionExists("user")
+		}
+		 catch (Exception e) {
+			 System.out.println("got to mongo operation error "+e);
+//			 System.out.println("got heeer "+e);
+//				log.info("*****Some sort of error ****** "+e);
+//	}
+		 
 				if (mongoOperations.collectionExists("user")) {
 					log.info("*****USER COLLECTION FOUND IN THE DB******");
 					Query query = new Query();
@@ -98,10 +106,10 @@ public class RedirectController {
 					throw new NoSuchResourceFound("No collection found in db..");
 				}
 			}
-			 catch (Exception e) {
-				 System.out.println("got heeer "+e);
-					log.info("*****Some sort of error ****** "+e);
-		}
+//			 catch (Exception e) {
+//				 System.out.println("got heeer "+e);
+//					log.info("*****Some sort of error ****** "+e);
+//		}
 		
 		return new ModelAndView(new InternalResourceView("/error.jsp", true));
 	}
