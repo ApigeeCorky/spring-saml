@@ -60,7 +60,7 @@ public class RedirectController {
 					log.info("*****USER COLLECTION FOUND IN THE DB******");
 					Query query = new Query();
 					query.addCriteria(Criteria.where("username").is(userName));
-					if (mongoOperations.find(query, null, "user") != null) {
+					if (mongoOperations.count(query, "user") > 0) {
 						log.info("Authorized username {} found in the request...", userName);
 						// update document with query
 						String samlKey = null;
