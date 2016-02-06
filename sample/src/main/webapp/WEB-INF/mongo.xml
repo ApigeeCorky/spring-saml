@@ -9,8 +9,14 @@
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongo" ref="mongo" />
 		<constructor-arg name="databaseName" value="datawarehouse" />
+		<constructor-arg name="userCredentials" ref="userCredentials"/>
 		<!-- <constructor-arg name="defaultCollectionName" value="user"/> -->
 	</bean>
+	
+	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+    <constructor-arg name="username" value="td_user" />
+    <constructor-arg name="password" value="poC1n7WLmCdD" />
+</bean>
 
 	<!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
@@ -27,9 +33,4 @@
 		<property name="threadsAllowedToBlockForConnectionMultiplier" value="4"></property>
 		<property name="socketKeepAlive" value="true"></property>
 	</bean>
-
-	<!-- Use this post processor to translate any MongoExceptions thrown in 
-		@Repository annotated classes -->
-	<!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
-
 </beans>
