@@ -49,7 +49,7 @@ public class RedirectController {
 			log.info("********No auth found redirecting to saml login page***");
 			return new ModelAndView("redirect:/saml/login");
 		}
-		String userName = "l.monnington";//authentication.getName();
+		String userName = authentication.getName();
 		
 		// TODO: remove hard coded username and uncomment above line
 		// String userName = "dariusz.zbik";
