@@ -246,7 +246,7 @@
 								<bean
 									class="org.springframework.security.saml.metadata.ExtendedMetadata" />
 							</entry>
-							<entry key="https://login.cit.lastmile.com/">
+							<entry key="https://login.lastmile.com/">
 								<bean
 									class="org.springframework.security.saml.metadata.ExtendedMetadata" />
 							</entry>
